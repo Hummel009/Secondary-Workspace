@@ -1,20 +1,20 @@
-package bd.proxy;
+package lp.proxy;
 
-import bd.util.BDCommander;
 import cpw.mods.fml.common.event.*;
+import lp.util.LPCommander;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.*;
 import net.minecraft.util.ResourceLocation;
 
-public class BDClientProxy extends BDServerProxy implements IResourceManagerReloadListener {
+public class LPClientProxy extends LPServerProxy implements IResourceManagerReloadListener {
 	@Override
 	public void onInit(FMLInitializationEvent event) {
-		((IReloadableResourceManager) Minecraft.getMinecraft().getResourceManager()).registerReloadListener(new BDClientProxy());
+		((IReloadableResourceManager) Minecraft.getMinecraft().getResourceManager()).registerReloadListener(new LPClientProxy());
 	}
 
 	@Override
 	public void onResourceManagerReload(IResourceManager resourceManager) {
-		BDCommander.setClientMapImage(new ResourceLocation("bd:map/map.png"));
+		LPCommander.setClientMapImage(new ResourceLocation("lp:map/map.png"));
 	}
 
 	@Override

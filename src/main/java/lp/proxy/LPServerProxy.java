@@ -1,8 +1,8 @@
-package bd.proxy;
+package lp.proxy;
 
 import cpw.mods.fml.common.event.*;
 
-public class BDServerProxy {
+public class LPServerProxy {
 
 	public void onInit(FMLInitializationEvent event) {
 	}
