@@ -7,10 +7,10 @@ import java.util.*;
 
 import javax.imageio.ImageIO;
 
-import bd.database.BDRegistry;
 import cpw.mods.fml.common.*;
 import cpw.mods.fml.relauncher.*;
 import lotr.client.LOTRTextures;
+import lotr.client.gui.LOTRMapLabels;
 import lotr.common.*;
 import lotr.common.LOTRDimension.DimensionRegion;
 import lotr.common.entity.npc.*;
@@ -211,10 +211,6 @@ public class BDCommander {
 		return modContainer;
 	}
 
-	public static List<Item> getFields() {
-		return getObjectFieldsOfType(BDRegistry.class, Item.class);
-	}
-
 	private static BufferedImage getImage(InputStream in) {
 		try {
 			return ImageIO.read(in);
@@ -285,6 +281,11 @@ public class BDCommander {
 
 	public static void registerRoad(String name, Object... waypoints) {
 		findAndInvokeMethod(new Object[] { name, waypoints }, LOTRRoads.class, null, "registerRoad", String.class, Object[].class);
+	}
+
+	public static void removeMapLabel(LOTRMapLabels label) {
+		ReflectionHelper.setPrivateValue(LOTRMapLabels.class, label, (Object) Float.valueOf(1.0E-4f), new String[] { "maxZoom" });
+		ReflectionHelper.setPrivateValue(LOTRMapLabels.class, label, (Object) 0, new String[] { "minZoom" });
 	}
 
 	@SideOnly(value = Side.CLIENT)

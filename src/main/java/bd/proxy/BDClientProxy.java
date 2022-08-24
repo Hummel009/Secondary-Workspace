@@ -1,6 +1,5 @@
 package bd.proxy;
 
-import bd.render.BDRendererManager;
 import bd.util.BDCommander;
 import cpw.mods.fml.common.event.*;
 import net.minecraft.client.Minecraft;
@@ -20,6 +19,5 @@ public class BDClientProxy extends BDServerProxy implements IResourceManagerRelo
 
 	@Override
 	public void preInit(FMLPreInitializationEvent event) {
-		BDRendererManager.load();
 	}
 }
