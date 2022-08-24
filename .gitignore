@@ -1,0 +1,18 @@
+
+#Ignore EVERYTHING
+/*
+
+#Don't ignore src folder
+!src/
+!lib/
+
+#Also don't ignore the install scripts
+!gradle*
+!gradle/
+!build.gradle
+!setup.bat
+
+#Or this file ;) (or readme)
+!.gitignore
+!README.md
+Setup.bat
