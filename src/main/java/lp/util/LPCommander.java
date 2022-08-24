@@ -3,6 +3,7 @@ package lp.util;
 import java.awt.image.BufferedImage;
 import java.io.*;
 import java.lang.reflect.*;
+import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
 
@@ -18,6 +19,25 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.util.ResourceLocation;
 
 public class LPCommander {
+	public static void clearControlZones(LOTRFaction faction) {
+		ReflectionHelper.setPrivateValue(LOTRFaction.class, faction, new ArrayList(), new String[] { "controlZones" });
+	}
+
+	public static void clearFaction(LOTRFaction faction) {
+		faction.allowPlayer = false;
+		faction.hasFixedAlignment = true;
+		faction.fixedAlignment = 0;
+		if (faction.factionDimension != null) {
+			faction.factionDimension.factionList.remove(faction);
+		}
+		if (faction.factionRegion != null) {
+			faction.factionRegion.factionList.remove(faction);
+		}
+		faction.factionDimension = null;
+		faction.factionRegion = null;
+		clearControlZones(faction);
+	}
+
 	public static void clearRoadDataBase() {
 		Object dataBase = findAndInvokeConstructor("lotr.common.world.map.LOTRRoads$RoadPointDatabase");
 		ReflectionHelper.setPrivateValue(LOTRRoads.class, null, dataBase, "roadPointDatabase");

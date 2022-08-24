@@ -6,6 +6,7 @@ import cpw.mods.fml.common.*;
 import cpw.mods.fml.common.event.*;
 import cpw.mods.fml.relauncher.ReflectionHelper;
 import lotr.client.gui.LOTRMapLabels;
+import lotr.common.fac.LOTRFaction;
 import lotr.common.world.map.*;
 import lp.proxy.LPServerProxy;
 import lp.util.LPCommander;
@@ -26,7 +27,9 @@ public class LOTRPatcher {
 
 	@Mod.EventHandler
 	public void postInit(FMLPostInitializationEvent event) {
-
+		LPCommander.clearFaction(LOTRFaction.TAURETHRIM);
+		LPCommander.clearFaction(LOTRFaction.MORWAITH);
+		LPCommander.clearFaction(LOTRFaction.HALF_TROLL);
 		for (LOTRWaypoint wp : LOTRWaypoint.values()) {
 			if (wp.getX() > 2366 || wp.getY() > 2107) {
 				LPCommander.disableWaypoint(wp);
