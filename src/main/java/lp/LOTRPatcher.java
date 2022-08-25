@@ -8,6 +8,7 @@ import cpw.mods.fml.relauncher.ReflectionHelper;
 import lotr.client.gui.LOTRMapLabels;
 import lotr.common.fac.LOTRFaction;
 import lotr.common.world.map.*;
+import lotr.common.world.map.LOTRWaypoint.Region;
 import lp.proxy.LPServerProxy;
 import lp.util.LPCommander;
 import net.minecraft.util.ResourceLocation;
@@ -19,6 +20,24 @@ public class LOTRPatcher {
 	@Mod.Instance(value = "lp")
 	public static LOTRPatcher instance;
 
+	public static LOTRWaypoint Undmond;
+	public static LOTRWaypoint Talsir;
+	public static LOTRWaypoint Balost;
+	public static LOTRWaypoint Argond;
+	public static LOTRWaypoint AnnonBaran;
+	public static LOTRWaypoint Gitrenor;
+	public static LOTRWaypoint Angsul;
+	public static LOTRWaypoint Morkat;
+	public static LOTRWaypoint Szeldan;
+	public static LOTRWaypoint Kargasz;
+	public static LOTRWaypoint Litasz;
+	public static LOTRWaypoint Fandar;
+	public static LOTRWaypoint DorTalion;
+	public static LOTRWaypoint Hojra;
+	public static LOTRWaypoint KametBrin;
+	public static LOTRWaypoint Ettenmurs;
+	public static LOTRWaypoint MorvaTart;
+	public static LOTRWaypoint Eldanor;
 	@Mod.EventHandler
 	public void onInit(FMLInitializationEvent event) {
 		LPCommander.setServerMapImage(new ResourceLocation("lp:map/map.png"));
@@ -27,6 +46,45 @@ public class LOTRPatcher {
 
 	@Mod.EventHandler
 	public void postInit(FMLPostInitializationEvent event) {
+		Undmond = LPCommander.addWaypoint("Undmond", Region.ERIADOR, LOTRFaction.RANGER_NORTH, 936, 906);
+		Talsir = LPCommander.addWaypoint("Talsir", Region.ERIADOR, LOTRFaction.RANGER_NORTH, 881, 941);
+		Balost = LPCommander.addWaypoint("Balost", Region.ERIADOR, LOTRFaction.RANGER_NORTH, 894, 902);
+		Argond = LPCommander.addWaypoint("Argond", Region.ERIADOR, LOTRFaction.RANGER_NORTH, 921, 865);
+		AnnonBaran = LPCommander.addWaypoint("AnnonBaran", Region.ERIADOR, LOTRFaction.RANGER_NORTH, 750, 901);
+		Gitrenor = LPCommander.addWaypoint("Gitrenor", Region.ERIADOR, LOTRFaction.RANGER_NORTH, 765, 878);
+		Angsul = LPCommander.addWaypoint("Angsul", Region.ERIADOR, LOTRFaction.ANGMAR, 1010, 536);
+		Morkat = LPCommander.addWaypoint("Morkat", Region.ERIADOR, LOTRFaction.ANGMAR, 1050, 551);
+		Szeldan = LPCommander.addWaypoint("Szeldan", Region.ERIADOR, LOTRFaction.ANGMAR, 1093, 569);
+		Kargasz = LPCommander.addWaypoint("Kargasz", Region.ERIADOR, LOTRFaction.ANGMAR, 1048, 573);
+		Litasz = LPCommander.addWaypoint("Litasz", Region.ERIADOR, LOTRFaction.ANGMAR, 1165, 585);
+		Fandar = LPCommander.addWaypoint("Fandar", Region.ERIADOR, LOTRFaction.ANGMAR, 1053, 702);
+		DorTalion = LPCommander.addWaypoint("DorTalion", Region.ERIADOR, LOTRFaction.ANGMAR, 1006, 636);
+		Hojra = LPCommander.addWaypoint("Hojra", Region.ERIADOR, LOTRFaction.ANGMAR, 1114, 672);
+		KametBrin = LPCommander.addWaypoint("KametBrin", Region.ERIADOR, LOTRFaction.ANGMAR, 1138, 682);
+		Ettenmurs = LPCommander.addWaypoint("Ettenmurs", Region.ERIADOR, LOTRFaction.ANGMAR, 1133, 639);
+		MorvaTart = LPCommander.addWaypoint("MorvaTart", Region.ERIADOR, LOTRFaction.ANGMAR, 1088, 635);
+		Eldanor = LPCommander.addWaypoint("Eldanor", Region.ERIADOR, LOTRFaction.ANGMAR, 1048, 594);
+
+		((List) ReflectionHelper.getPrivateValue(LOTRRoads.class, null, "allRoads")).clear();
+		((List) ReflectionHelper.getPrivateValue(LOTRRoads.class, null, "displayOnlyRoads")).clear();
+		LPCommander.clearRoadDataBase();
+
+		LPCommander.registerRoad("EredLuin", LOTRWaypoint.CARN_DUM, Angsul, Kargasz);
+
+		LPCommander.registerRoad("EredLuin", Szeldan, Litasz);
+		LPCommander.registerRoad("EredLuin", Morkat, Szeldan);
+		LPCommander.registerRoad("EredLuin", Eldanor, Kargasz, Morkat);
+		LPCommander.registerRoad("EredLuin", KametBrin, Hojra);
+		LPCommander.registerRoad("EredLuin", Eldanor, MorvaTart, Ettenmurs);
+		LPCommander.registerRoad("EredLuin", LOTRWaypoint.LAST_BRIDGE, Hojra, Ettenmurs);
+		LPCommander.registerRoad("EredLuin", LOTRWaypoint.LAST_BRIDGE, Fandar, DorTalion);
+		LPCommander.registerRoad("EredLuin", LOTRWaypoint.GREENWAY_CROSSROADS, Argond, Undmond);
+		LPCommander.registerRoad("EredLuin", Argond, Balost, Talsir);
+		LPCommander.registerRoad("EredLuin", LOTRWaypoint.ERYN_VORN, new int[] {811, 921}, Talsir);
+		LPCommander.registerRoad("EredLuin", Gitrenor, LOTRWaypoint.SARN_FORD);
+		LPCommander.registerRoad("EredLuin", AnnonBaran, Gitrenor);
+		LPCommander.registerRoad("EredLuin", Gitrenor, new int[] {700, 921}, LOTRWaypoint.HARLINDON);
+
 		LPCommander.clearFaction(LOTRFaction.TAURETHRIM);
 		LPCommander.clearFaction(LOTRFaction.MORWAITH);
 		LPCommander.clearFaction(LOTRFaction.HALF_TROLL);
@@ -42,9 +100,6 @@ public class LOTRPatcher {
 		}
 		LPCommander.disableWaypoint(LOTRWaypoint.GREAT_PLAINS_NORTH);
 		LPCommander.disableWaypoint(LOTRWaypoint.MOUNT_SAND);
-		((List) ReflectionHelper.getPrivateValue(LOTRRoads.class, null, "allRoads")).clear();
-		((List) ReflectionHelper.getPrivateValue(LOTRRoads.class, null, "displayOnlyRoads")).clear();
-		LPCommander.clearRoadDataBase();
 
 		LPCommander.registerRoad("EredLuin", LOTRWaypoint.NOGROD, LOTRWaypoint.BELEGOST);
 		LPCommander.registerRoad("NogrodForlond", LOTRWaypoint.NOGROD, LOTRWaypoint.FORLOND);

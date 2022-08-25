@@ -17,11 +17,28 @@ import lotr.common.world.genlayer.LOTRGenLayerWorld;
 import lotr.common.world.map.*;
 import net.minecraft.client.Minecraft;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.common.util.EnumHelper;
 
 public class LPCommander {
 	public static void clearControlZones(LOTRFaction faction) {
 		ReflectionHelper.setPrivateValue(LOTRFaction.class, faction, new ArrayList(), new String[] { "controlZones" });
 	}
+
+    public static LOTRWaypoint addWaypoint(String name, LOTRWaypoint.Region region, LOTRFaction faction, double x, double z) {
+        return addWaypoint(name, region, faction, x, z, false);
+    }
+
+    public static LOTRWaypoint addWaypoint(String name, LOTRWaypoint.Region region, LOTRFaction faction, double x, double z, boolean hidden) {
+        Class[] classArr = new Class[]{LOTRWaypoint.Region.class, LOTRFaction.class, Double.TYPE, Double.TYPE, Boolean.TYPE};
+        Object[] args = new Object[]{region, faction, x, z, hidden};
+        return (LOTRWaypoint)EnumHelper.addEnum(LOTRWaypoint.class, (String)name, (Class[])classArr, (Object[])args);
+    }
+
+    public static LOTRWaypoint.Region addWaypointRegion(String name) {
+        Class[] classArr = new Class[]{};
+        Object[] args = new Object[]{};
+        return (LOTRWaypoint.Region)EnumHelper.addEnum(LOTRWaypoint.Region.class, (String)name, (Class[])classArr, (Object[])args);
+    }
 
 	public static void clearFaction(LOTRFaction faction) {
 		faction.allowPlayer = false;
