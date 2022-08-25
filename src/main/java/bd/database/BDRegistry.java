@@ -1,7 +1,5 @@
 package bd.database;
 
-import com.google.common.base.CaseFormat;
-
 import bd.block.*;
 import bd.item.*;
 import cpw.mods.fml.common.registry.GameRegistry;
@@ -14,6 +12,20 @@ import net.minecraft.item.Item.ToolMaterial;
 import net.minecraft.potion.Potion;
 
 public class BDRegistry {
+	public static Item battleaxeEnedwaithDonat;
+	public static Item battleaxeRhonanionDonat;
+	public static Item bodyEnedwaithDonat;
+	public static Item bootsEnedwaithDonat;
+	public static Item crossbowRhovanion;
+	public static Item enedwaithDonatBow;
+	public static Item hammerEnedwaithDonat;
+	public static Item helmetEnedwaithDonat;
+	public static Item legsEnedwaithDonat;
+	public static Item rhovanionDonat_body;
+	public static Item rhovanionDonat_boots;
+	public static Item rhovanionDonat_helmet;
+	public static Item rhovanionDonat_legs;
+	public static Item swordRhonanionDonat;
 
 	public static Block table_eregion;
 	public static Block table_khand;
@@ -964,6 +976,22 @@ public class BDRegistry {
 		woodlock = new Item().setCreativeTab(BDCreativeTabs.tabAnus);
 		yelbag = new Item().setCreativeTab(BDCreativeTabs.tabAnus);
 
+		battleaxeEnedwaithDonat = new LOTRItemBattleaxe(BDMaterial.ENEDWAITHDONAT);
+		battleaxeRhonanionDonat = new LOTRItemBattleaxe(BDMaterial.RHOVANIONDONAT);
+		bodyEnedwaithDonat = new BDItemArmor(BDMaterial.ENEDWAITHDONAT, 1);
+		bootsEnedwaithDonat = new BDItemArmor(BDMaterial.ENEDWAITHDONAT, 3);
+		crossbowRhovanion = new LOTRItemCrossbow(BDMaterial.RHOVANIONDONAT);
+		enedwaithDonatBow = new LOTRItemBow(BDMaterial.ENEDWAITHDONAT);
+		hammerEnedwaithDonat = new LOTRItemHammer(BDMaterial.ENEDWAITHDONAT);
+		helmetEnedwaithDonat = new BDItemArmor(BDMaterial.ENEDWAITHDONAT, 0, "helmet");
+		legsEnedwaithDonat = new BDItemArmor(BDMaterial.ENEDWAITHDONAT, 2);
+		rhovanionDonat_body = new BDItemArmor(BDMaterial.RHOVANIONDONAT, 1, "chestplate");
+		rhovanionDonat_boots = new BDItemArmor(BDMaterial.RHOVANIONDONAT, 3);
+		rhovanionDonat_helmet = new BDItemArmor(BDMaterial.RHOVANIONDONAT, 0);
+		rhovanionDonat_legs = new BDItemArmor(BDMaterial.RHOVANIONDONAT, 2);
+		swordRhonanionDonat = new LOTRItemSword(BDMaterial.RHOVANIONDONAT);
+
+
 		BDPatcher.patchInventory();
 
 		WOTRMCNewBlocks.initializeNewBlocks();
@@ -1488,26 +1516,38 @@ public class BDRegistry {
 		register(rhubarb_pie, "rhubarb_pie");
 		register(treasure_chest, "treasure_chest");
 		register(watermelon_cookies, "watermelon_cookies");
+		register(battleaxeEnedwaithDonat, "battleaxeEnedwaithDonat");
+		register(battleaxeRhonanionDonat, "battleaxeRhonanionDonat");
+		register(bodyEnedwaithDonat, "bodyEnedwaithDonat");
+		register(bootsEnedwaithDonat, "bootsEnedwaithDonat");
+		register(crossbowRhovanion, "crossbowRhovanion");
+		register(enedwaithDonatBow, "enedwaithDonatBow");
+		register(hammerEnedwaithDonat, "hammerEnedwaithDonat");
+		register(helmetEnedwaithDonat, "helmetEnedwaithDonat");
+		register(legsEnedwaithDonat, "legsEnedwaithDonat");
+		register(rhovanionDonat_body, "rhovanionDonat_body");
+		register(rhovanionDonat_boots, "rhovanionDonat_boots");
+		register(rhovanionDonat_helmet, "rhovanionDonat_helmet");
+		register(rhovanionDonat_legs, "rhovanionDonat_legs");
+		register(swordRhonanionDonat, "swordRhonanionDonat");
+
 	}
 
 	private static void register(Item item, String name) {
-		String lowerUnderscoreName = CaseFormat.LOWER_CAMEL.to(CaseFormat.LOWER_UNDERSCORE, name);
-		item.setUnlocalizedName(lowerUnderscoreName);
-		item.setTextureName("bd:" + lowerUnderscoreName);
-		GameRegistry.registerItem(item, lowerUnderscoreName);
+		item.setUnlocalizedName(name);
+		item.setTextureName("bd:" + name);
+		GameRegistry.registerItem(item, name);
 	}
 
 	public static void registerBlock(Block block, String name) {
-		String lowerUnderscoreName = CaseFormat.LOWER_CAMEL.to(CaseFormat.LOWER_UNDERSCORE, name);
-		block.setBlockName(lowerUnderscoreName);
-		block.setBlockTextureName("bd:" + lowerUnderscoreName);
-		GameRegistry.registerBlock(block, lowerUnderscoreName);
+		block.setBlockName(name);
+		block.setBlockTextureName("bd:" + name);
+		GameRegistry.registerBlock(block, name);
 	}
 
 	public static void registerItemLotr(Item item, String name) {
-		String lowerUnderscoreName = CaseFormat.LOWER_CAMEL.to(CaseFormat.LOWER_UNDERSCORE, name);
-		item.setUnlocalizedName(lowerUnderscoreName);
-		item.setTextureName("lotr:" + lowerUnderscoreName);
-		GameRegistry.registerItem(item, lowerUnderscoreName);
+		item.setUnlocalizedName(name);
+		item.setTextureName("lotr:" + name);
+		GameRegistry.registerItem(item, name);
 	}
 }

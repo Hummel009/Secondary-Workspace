@@ -66,6 +66,9 @@ public class BDMaterial {
 	public static LOTRMaterial rhovanion1 = newLOTRMaterial("rhovanion1", 700, 3.0f, 0.712f, 7.0f, 3, 10, null);
 	public static LOTRMaterial red_dwarven1 = newLOTRMaterial("red_dwarven1", 700, 3.0f, 0.712f, 7.0f, 3, 10, null);
 
+	public static LOTRMaterial ENEDWAITHDONAT  = newLOTRMaterial("enedwaithdonat", 2400, 5.0f, 0.75f, 9.0f, 4, 8, null);
+	public static LOTRMaterial RHOVANIONDONAT  = newLOTRMaterial("rhovaniondonat", 2400, 5.0f, 0.75f, 9.0f, 4, 8, null);
+
 	private static boolean setup = false;
 	private static Constructor<LOTRMaterial> constructor;
 	private static Method setUses;
