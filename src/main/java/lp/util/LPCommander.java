@@ -3,7 +3,11 @@ package lp.util;
 import java.awt.image.BufferedImage;
 import java.io.*;
 import java.lang.reflect.*;
-import java.util.ArrayList;
+import java.net.*;
+import java.nio.file.*;
+import java.nio.file.FileSystem;
+import java.util.*;
+import java.util.stream.Stream;
 
 import javax.imageio.ImageIO;
 
@@ -21,6 +25,20 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.util.EnumHelper;
 
 public class LPCommander {
+	public static LOTRMapLabels addMapLabel(String enumName, LOTRBiome biomeLabel, int x, int y, float scale, int angle, float zoomMin, float zoomMan) {
+		return addMapLabel(enumName, (Object) biomeLabel, x, y, scale, angle, zoomMin, zoomMan);
+	}
+
+	private static LOTRMapLabels addMapLabel(String enumName, Object label, int x, int y, float scale, int angle, float zoomMin, float zoomMan) {
+		Class[] classArr = { Object.class, Integer.TYPE, Integer.TYPE, Float.TYPE, Integer.TYPE, Float.TYPE, Float.TYPE };
+		Object[] args = { label, x, y, Float.valueOf(scale), angle, Float.valueOf(zoomMin), Float.valueOf(zoomMan) };
+		return EnumHelper.addEnum(LOTRMapLabels.class, enumName, classArr, args);
+	}
+
+	public static LOTRMapLabels addMapLabel(String enumName, String stringLabel, int x, int y, float scale, int angle, float zoomMin, float zoomMan) {
+		return addMapLabel(enumName, (Object) stringLabel, x, y, scale, angle, zoomMin, zoomMan);
+	}
+
 	public static LOTRWaypoint addWaypoint(String name, LOTRWaypoint.Region region, LOTRFaction faction, double x, double z) {
 		return addWaypoint(name, region, faction, x, z, false);
 	}
@@ -30,20 +48,6 @@ public class LPCommander {
 		Object[] args = { region, faction, x, z, hidden };
 		return EnumHelper.addEnum(LOTRWaypoint.class, name, classArr, args);
 	}
-
-    public static LOTRMapLabels addMapLabel(String enumName, LOTRBiome biomeLabel, int x, int y, float scale, int angle, float zoomMin, float zoomMan) {
-        return addMapLabel(enumName, (Object)biomeLabel, x, y, scale, angle, zoomMin, zoomMan);
-    }
-
-    public static LOTRMapLabels addMapLabel(String enumName, String stringLabel, int x, int y, float scale, int angle, float zoomMin, float zoomMan) {
-        return addMapLabel(enumName, (Object)stringLabel, x, y, scale, angle, zoomMin, zoomMan);
-    }
-
-    private static LOTRMapLabels addMapLabel(String enumName, Object label, int x, int y, float scale, int angle, float zoomMin, float zoomMan) {
-        Class[] classArr = new Class[]{Object.class, Integer.TYPE, Integer.TYPE, Float.TYPE, Integer.TYPE, Float.TYPE, Float.TYPE};
-        Object[] args = new Object[]{label, x, y, Float.valueOf(scale), angle, Float.valueOf(zoomMin), Float.valueOf(zoomMan)};
-        return (LOTRMapLabels)EnumHelper.addEnum(LOTRMapLabels.class, (String)enumName, (Class[])classArr, (Object[])args);
-    }
 
 	public static LOTRWaypoint.Region addWaypointRegion(String name) {
 		Class[] classArr = {};
@@ -123,6 +127,50 @@ public class LPCommander {
 		}
 	}
 
+	public static List<String> getAllSubFilePaths(ResourceLocation res, String... extensions) {
+		ArrayList<String> list = new ArrayList<>();
+		String baseStringPath = getPath(res);
+		ModContainer container = getContainer(res);
+		try {
+			Path basePath;
+			URI uri = container.getClass().getResource(baseStringPath).toURI();
+			FileSystem fileSystem = null;
+			if ("jar".equals(uri.getScheme())) {
+				fileSystem = FileSystems.newFileSystem(uri, Collections.emptyMap());
+				basePath = fileSystem.getPath(baseStringPath);
+			} else {
+				basePath = Paths.get(uri);
+			}
+			Stream<Path> allFilePaths = Files.walk(basePath);
+			Iterator it = allFilePaths.iterator();
+			block2: while (it.hasNext()) {
+				Path filePath = (Path) it.next();
+				String stringFilePath = filePath.toString();
+				if (!stringFilePath.contains(".")) {
+					continue;
+				}
+				String extension = stringFilePath.substring(stringFilePath.indexOf(".") + 1);
+				if (extensions.length != 0) {
+					for (String allowedExtension : extensions) {
+						if (!allowedExtension.equalsIgnoreCase(extension)) {
+							continue;
+						}
+						list.add(stringFilePath);
+						continue block2;
+					}
+					continue;
+				}
+				list.add(stringFilePath);
+			}
+			allFilePaths.close();
+			if (fileSystem != null) {
+				fileSystem.close();
+			}
+		} catch (IOException | URISyntaxException e) {
+		}
+		return list;
+	}
+
 	private static ModContainer getContainer(ResourceLocation res) {
 		ModContainer modContainer = Loader.instance().getIndexedModList().get(res.getResourceDomain());
 		if (modContainer == null) {
@@ -149,12 +197,35 @@ public class LPCommander {
 		return container.getClass().getResourceAsStream(path);
 	}
 
-	private static InputStream getInputStream(ResourceLocation res) {
+	public static InputStream getInputStream(ResourceLocation res) {
 		return getInputStream(getContainer(res), getPath(res));
+	}
+
+	public static Map<String, InputStream> getInputStreams(ResourceLocation res, String... extensions) {
+		HashMap<String, InputStream> map = new HashMap<>();
+		for (Map.Entry<String, ResourceLocation> entry : getSubFileResourceLocations(res, extensions).entrySet()) {
+			map.put(entry.getKey(), getInputStream(entry.getValue()));
+		}
+		return map;
 	}
 
 	private static String getPath(ResourceLocation res) {
 		return "/assets/" + res.getResourceDomain() + "/" + res.getResourcePath();
+	}
+
+	public static Map<String, ResourceLocation> getSubFileResourceLocations(ResourceLocation res, String... extensions) {
+		HashMap<String, ResourceLocation> map = new HashMap<>();
+		String basePath = getPath(res);
+		for (String file : getAllSubFilePaths(res, extensions)) {
+			String name = file.replace("\\", "/");
+			int startIndex = name.contains(basePath) ? name.lastIndexOf(basePath) + basePath.length() + (basePath.endsWith("/") ? 0 : 1) : 0;
+			int endIndex = name.indexOf(".");
+			String newResPath = res.getResourcePath() + (res.getResourcePath().endsWith("/") ? "" : "/") + name.substring(startIndex);
+			ResourceLocation fileRes = new ResourceLocation(res.getResourceDomain(), newResPath);
+			name = name.substring(startIndex, endIndex);
+			map.put(name, fileRes);
+		}
+		return map;
 	}
 
 	public static void registerRoad(String name, Object... waypoints) {
@@ -164,6 +235,11 @@ public class LPCommander {
 	public static void removeMapLabel(LOTRMapLabels label) {
 		ReflectionHelper.setPrivateValue(LOTRMapLabels.class, label, 1.0E-4F, "maxZoom");
 		ReflectionHelper.setPrivateValue(LOTRMapLabels.class, label, 0, "minZoom");
+	}
+
+	public static LOTRWaypoint replaceWaypoint(String name, LOTRWaypoint.Region region, LOTRFaction faction, LOTRWaypoint wp) {
+		disableWaypoint(wp);
+		return addWaypoint(name, region, faction, wp.getX(), wp.getY(), false);
 	}
 
 	@SideOnly(value = Side.CLIENT)

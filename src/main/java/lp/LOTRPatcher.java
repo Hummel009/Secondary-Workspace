@@ -6,7 +6,7 @@ import lotr.common.fac.LOTRFaction;
 import lp.biome.LPBiome;
 import lp.map.*;
 import lp.proxy.LPServerProxy;
-import lp.util.LPCommander;
+import lp.util.*;
 import net.minecraft.util.ResourceLocation;
 
 @Mod(modid = "lp", version = "Prod. Hummel009", name = "LOTR Patch", dependencies = "required-after:lotr")
@@ -36,6 +36,7 @@ public class LOTRPatcher {
 		LPWaypoint.preInit();
 		LPBiome.preInit();
 		LPMapLabels.preInit();
+		LPLangOverrides.INSTANCE.overrideForgeLang();
 		proxy.preInit(event);
 	}
 }

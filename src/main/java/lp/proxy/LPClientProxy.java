@@ -1,7 +1,7 @@
 package lp.proxy;
 
 import cpw.mods.fml.common.event.*;
-import lp.util.LPCommander;
+import lp.util.*;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.*;
 import net.minecraft.util.ResourceLocation;
@@ -15,6 +15,7 @@ public class LPClientProxy extends LPServerProxy implements IResourceManagerRelo
 	@Override
 	public void onResourceManagerReload(IResourceManager resourceManager) {
 		LPCommander.setClientMapImage(new ResourceLocation("lp:map/map.png"));
+		LPLangOverrides.INSTANCE.overrideMinecraftLang();
 	}
 
 	@Override

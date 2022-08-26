@@ -33,6 +33,21 @@ public class LPWaypoint {
 		}
 		LPCommander.disableWaypoint(LOTRWaypoint.GREAT_PLAINS_NORTH);
 		LPCommander.disableWaypoint(LOTRWaypoint.MOUNT_SAND);
+		LPCommander.disableWaypoint(LOTRWaypoint.FORNOST);
+		LPCommander.disableWaypoint(LOTRWaypoint.ANNUMINAS);
+		LPCommander.disableWaypoint(LOTRWaypoint.NORTH_DOWNS);
+
+		LPCommander.replaceWaypoint("FORNOST", Region.ARTHEDAIN, LOTRFaction.RANGER_NORTH, LOTRWaypoint.FORNOST);
+		LPCommander.replaceWaypoint("ANNUMINAS", Region.ARTHEDAIN, LOTRFaction.RANGER_NORTH, LOTRWaypoint.ANNUMINAS);
+		LPCommander.replaceWaypoint("NORTH_DOWNS", Region.ARTHEDAIN, LOTRFaction.RANGER_NORTH, LOTRWaypoint.NORTH_DOWNS);
+		LPCommander.replaceWaypoint("ERYN_VORN", Region.CARDOLAN, LOTRFaction.RANGER_NORTH, LOTRWaypoint.ERYN_VORN);
+		LPCommander.replaceWaypoint("THARBAD", Region.CARDOLAN, LOTRFaction.RANGER_NORTH, LOTRWaypoint.THARBAD);
+		LPCommander.replaceWaypoint("LOND_DAER", Region.CARDOLAN, LOTRFaction.RANGER_NORTH, LOTRWaypoint.LOND_DAER);
+		LPCommander.replaceWaypoint("SARN_FORD", Region.CARDOLAN, LOTRFaction.RANGER_NORTH, LOTRWaypoint.SARN_FORD);
+		LPCommander.replaceWaypoint("GREENWAY_CROSSROADS", Region.CARDOLAN, LOTRFaction.RANGER_NORTH, LOTRWaypoint.GREENWAY_CROSSROADS);
+		LPCommander.replaceWaypoint("LAST_BRIDGE", Region.RHUDAUR, LOTRFaction.ANGMAR, LOTRWaypoint.LAST_BRIDGE);
+		LPCommander.replaceWaypoint("THE_TROLLSHAWS", Region.RHUDAUR, LOTRFaction.ANGMAR, LOTRWaypoint.THE_TROLLSHAWS);
+
 		Undmond = LPCommander.addWaypoint("Undmond", Region.CARDOLAN, LOTRFaction.RANGER_NORTH, 936, 906);
 		Talsir = LPCommander.addWaypoint("Talsir", Region.CARDOLAN, LOTRFaction.RANGER_NORTH, 881, 941);
 		Balost = LPCommander.addWaypoint("Balost", Region.CARDOLAN, LOTRFaction.RANGER_NORTH, 894, 902);
@@ -48,9 +63,10 @@ public class LPWaypoint {
 		DorTalion = LPCommander.addWaypoint("DorTalion", Region.RHUDAUR, LOTRFaction.ANGMAR, 1006, 636);
 		Hojra = LPCommander.addWaypoint("Hojra", Region.RHUDAUR, LOTRFaction.ANGMAR, 1114, 672);
 		KametBrin = LPCommander.addWaypoint("KametBrin", Region.RHUDAUR, LOTRFaction.ANGMAR, 1138, 682);
-		Ettenmurs = LPCommander.addWaypoint("Ettenmurs", Region.RHUDAUR, LOTRFaction.ANGMAR, 1133, 639);
-		MorvaTart = LPCommander.addWaypoint("MorvaTart", Region.RHUDAUR, LOTRFaction.ANGMAR, 1088, 635);
-		Eldanor = LPCommander.addWaypoint("Eldanor", Region.RHUDAUR, LOTRFaction.ANGMAR, 1048, 594);
+
+		Ettenmurs = LPCommander.addWaypoint("Ettenmurs", LOTRWaypoint.Region.ETTENMOORS, LOTRFaction.ANGMAR, 1133, 639);
+		MorvaTart = LPCommander.addWaypoint("MorvaTart", LOTRWaypoint.Region.ETTENMOORS, LOTRFaction.ANGMAR, 1088, 635);
+		Eldanor = LPCommander.addWaypoint("Eldanor", LOTRWaypoint.Region.ETTENMOORS, LOTRFaction.ANGMAR, 1048, 594);
 	}
 
 	public static class Region {
