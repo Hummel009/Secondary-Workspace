@@ -19,6 +19,7 @@ public class LOTRPatcher {
 	@Mod.EventHandler
 	public void onInit(FMLInitializationEvent event) {
 		LPCommander.setServerMapImage(new ResourceLocation("lp:map/map.png"));
+		LPRoads.onInit();
 		proxy.onInit(event);
 	}
 
@@ -33,7 +34,6 @@ public class LOTRPatcher {
 	public void preInit(FMLPreInitializationEvent event) {
 		LPWaypoint.Region.preInit();
 		LPWaypoint.preInit();
-		LPRoads.preInit();
 		LPBiome.preInit();
 		LPMapLabels.preInit();
 		proxy.preInit(event);

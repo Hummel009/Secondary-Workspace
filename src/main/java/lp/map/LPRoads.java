@@ -7,7 +7,7 @@ import lotr.common.world.map.*;
 import lp.util.LPCommander;
 
 public class LPRoads {
-	public static void preInit() {
+	public static void onInit() {
 		((List) ReflectionHelper.getPrivateValue(LOTRRoads.class, null, "allRoads")).clear();
 		((List) ReflectionHelper.getPrivateValue(LOTRRoads.class, null, "displayOnlyRoads")).clear();
 		LPCommander.clearRoadDataBase();
