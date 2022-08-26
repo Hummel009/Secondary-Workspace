@@ -13,6 +13,7 @@ import lotr.client.LOTRTextures;
 import lotr.client.gui.LOTRMapLabels;
 import lotr.common.LOTRDimension;
 import lotr.common.fac.LOTRFaction;
+import lotr.common.world.biome.LOTRBiome;
 import lotr.common.world.genlayer.LOTRGenLayerWorld;
 import lotr.common.world.map.*;
 import net.minecraft.client.Minecraft;
@@ -20,25 +21,39 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.util.EnumHelper;
 
 public class LPCommander {
-	public static void clearControlZones(LOTRFaction faction) {
-		ReflectionHelper.setPrivateValue(LOTRFaction.class, faction, new ArrayList(), new String[] { "controlZones" });
+	public static LOTRWaypoint addWaypoint(String name, LOTRWaypoint.Region region, LOTRFaction faction, double x, double z) {
+		return addWaypoint(name, region, faction, x, z, false);
 	}
 
-    public static LOTRWaypoint addWaypoint(String name, LOTRWaypoint.Region region, LOTRFaction faction, double x, double z) {
-        return addWaypoint(name, region, faction, x, z, false);
+	public static LOTRWaypoint addWaypoint(String name, LOTRWaypoint.Region region, LOTRFaction faction, double x, double z, boolean hidden) {
+		Class[] classArr = { LOTRWaypoint.Region.class, LOTRFaction.class, Double.TYPE, Double.TYPE, Boolean.TYPE };
+		Object[] args = { region, faction, x, z, hidden };
+		return EnumHelper.addEnum(LOTRWaypoint.class, name, classArr, args);
+	}
+
+    public static LOTRMapLabels addMapLabel(String enumName, LOTRBiome biomeLabel, int x, int y, float scale, int angle, float zoomMin, float zoomMan) {
+        return addMapLabel(enumName, (Object)biomeLabel, x, y, scale, angle, zoomMin, zoomMan);
     }
 
-    public static LOTRWaypoint addWaypoint(String name, LOTRWaypoint.Region region, LOTRFaction faction, double x, double z, boolean hidden) {
-        Class[] classArr = new Class[]{LOTRWaypoint.Region.class, LOTRFaction.class, Double.TYPE, Double.TYPE, Boolean.TYPE};
-        Object[] args = new Object[]{region, faction, x, z, hidden};
-        return (LOTRWaypoint)EnumHelper.addEnum(LOTRWaypoint.class, (String)name, (Class[])classArr, (Object[])args);
+    public static LOTRMapLabels addMapLabel(String enumName, String stringLabel, int x, int y, float scale, int angle, float zoomMin, float zoomMan) {
+        return addMapLabel(enumName, (Object)stringLabel, x, y, scale, angle, zoomMin, zoomMan);
     }
 
-    public static LOTRWaypoint.Region addWaypointRegion(String name) {
-        Class[] classArr = new Class[]{};
-        Object[] args = new Object[]{};
-        return (LOTRWaypoint.Region)EnumHelper.addEnum(LOTRWaypoint.Region.class, (String)name, (Class[])classArr, (Object[])args);
+    private static LOTRMapLabels addMapLabel(String enumName, Object label, int x, int y, float scale, int angle, float zoomMin, float zoomMan) {
+        Class[] classArr = new Class[]{Object.class, Integer.TYPE, Integer.TYPE, Float.TYPE, Integer.TYPE, Float.TYPE, Float.TYPE};
+        Object[] args = new Object[]{label, x, y, Float.valueOf(scale), angle, Float.valueOf(zoomMin), Float.valueOf(zoomMan)};
+        return (LOTRMapLabels)EnumHelper.addEnum(LOTRMapLabels.class, (String)enumName, (Class[])classArr, (Object[])args);
     }
+
+	public static LOTRWaypoint.Region addWaypointRegion(String name) {
+		Class[] classArr = {};
+		Object[] args = {};
+		return EnumHelper.addEnum(LOTRWaypoint.Region.class, name, classArr, args);
+	}
+
+	public static void clearControlZones(LOTRFaction faction) {
+		ReflectionHelper.setPrivateValue(LOTRFaction.class, faction, new ArrayList(), "controlZones");
+	}
 
 	public static void clearFaction(LOTRFaction faction) {
 		faction.allowPlayer = false;

@@ -1,4 +1,5 @@
-﻿lotr.waypoint.Undmond.info=
+﻿
+lotr.waypoint.Undmond.info=
 lotr.waypoint.Undmond=Ундмонд
 lotr.waypoint.Talsir.info=
 lotr.waypoint.Talsir=Талсир
@@ -34,3 +35,7 @@ lotr.waypoint.Eldanor.info=
 lotr.waypoint.Eldanor=Элданор
 lotr.waypoint.Litasz.info=
 lotr.waypoint.Litasz=Литаш
+lotr.road.Sus.name
+lotr.biome.arthedain.name=Артэдайн
+lotr.biome.cardolan.name=Кардолан
+lotr.biome.rhudaur.name=Рудаур
