@@ -20,7 +20,7 @@ public class LOTRItemArmor extends ItemArmor {
 			extraName = "helmet";
 		} else if (material == LOTRMaterial.BLACK_URUK && slotType == 1) {
 			extraName = "body";
-		} else if (((material == LOTRMaterial.ANGMAR || material == LOTRMaterial.WOOD_ELVEN) && slotType == 0)) {
+		} else if ((material == LOTRMaterial.ANGMAR || material == LOTRMaterial.WOOD_ELVEN) && slotType == 0) {
 			extraName = "helmet";
 		} else {
 			extraName = s;

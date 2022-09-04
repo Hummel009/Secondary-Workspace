@@ -15,7 +15,7 @@ public class BDClientProxy extends BDServerProxy implements IResourceManagerRelo
 
 	@Override
 	public void onResourceManagerReload(IResourceManager resourceManager) {
-		BDCommander.setClientMapImage(new ResourceLocation("bd:map/map.png"));
+		BDCommander.setClientMapImage(new ResourceLocation("bd:map/map_layer_2.png"));
 	}
 
 	@Override

@@ -66,8 +66,8 @@ public class BDMaterial {
 	public static LOTRMaterial rhovanion1 = newLOTRMaterial("rhovanion1", 700, 3.0f, 0.712f, 7.0f, 3, 10, null);
 	public static LOTRMaterial red_dwarven1 = newLOTRMaterial("red_dwarven1", 700, 3.0f, 0.712f, 7.0f, 3, 10, null);
 
-	public static LOTRMaterial ENEDWAITHDONAT  = newLOTRMaterial("enedwaithdonat", 2400, 5.0f, 0.75f, 9.0f, 4, 8, null);
-	public static LOTRMaterial RHOVANIONDONAT  = newLOTRMaterial("rhovaniondonat", 2400, 5.0f, 0.75f, 9.0f, 4, 8, null);
+	public static LOTRMaterial enedwaithdonat = newLOTRMaterial("enedwaithdonat", 2400, 5.0f, 0.75f, 9.0f, 4, 8, null);
+	public static LOTRMaterial rhovaniondonat = newLOTRMaterial("rhovaniondonat", 2400, 5.0f, 0.75f, 9.0f, 4, 8, null);
 
 	private static boolean setup = false;
 	private static Constructor<LOTRMaterial> constructor;
@@ -80,6 +80,22 @@ public class BDMaterial {
 	private static Method setCraftingMaterial;
 	private static Method setUndamageable;
 	private static Method setManFlesh;
+
+	public static void changeLOTRMaterials() {
+		editLOTRMaterial(LOTRMaterial.MORDOR, 700, 3.0f, 0.712f, 7.0f, 3, 10, null, null, true, false);
+		editLOTRMaterial(LOTRMaterial.NEAR_HARAD, 700, 3.0f, 0.712f, 7.0f, 3, 10, null, null, false, false);
+		editLOTRMaterial(LOTRMaterial.ANGMAR, 700, 3.0f, 0.712f, 7.0f, 3, 10, null, null, true, false);
+		editLOTRMaterial(LOTRMaterial.GUNDABAD_URUK, 700, 3.0f, 0.712f, 7.0f, 3, 10, null, null, true, false);
+		editLOTRMaterial(LOTRMaterial.DUNLENDING, 700, 3.0f, 0.712f, 7.0f, 3, 10, null, null, false, false);
+		editLOTRMaterial(LOTRMaterial.RHUN, 700, 3.0f, 0.712f, 7.0f, 3, 10, null, null, false, false);
+		editLOTRMaterial(LOTRMaterial.BLUE_DWARVEN, 700, 3.0f, 0.712f, 7.0f, 3, 10, null, null, false, false);
+		editLOTRMaterial(LOTRMaterial.GALADHRIM, 700, 3.0f, 0.712f, 7.0f, 3, 10, null, null, false, false);
+		editLOTRMaterial(LOTRMaterial.HIGH_ELVEN, 700, 3.0f, 0.712f, 7.0f, 3, 10, null, null, false, false);
+		editLOTRMaterial(LOTRMaterial.DALE, 700, 3.0f, 0.712f, 7.0f, 3, 10, null, null, false, false);
+		editLOTRMaterial(LOTRMaterial.DWARVEN, 700, 3.0f, 0.712f, 7.0f, 3, 10, null, null, false, false);
+		editLOTRMaterial(LOTRMaterial.WOOD_ELVEN, 700, 3.0f, 0.712f, 7.0f, 3, 10, null, null, false, false);
+		editLOTRMaterial(LOTRMaterial.RHUN_GOLD, 700, 3.0f, 0.73f, 7.0f, 3, 10, null, null, false, false);
+	}
 
 	private static LOTRMaterial editLOTRMaterial(LOTRMaterial material, int uses, float damage, float protection, float speed, int harvestLevel, int enchantability, Item craftingMaterialTool, Item craftingMaterialArmor, boolean manFlesh, boolean undamageable) {
 		BDMaterial.setup();
@@ -133,23 +149,6 @@ public class BDMaterial {
 		return material;
 	}
 
-    public static void changeLOTRMaterials() {
-        editLOTRMaterial(LOTRMaterial.MORDOR, 700, 3.0f, 0.712f, 7.0f, 3, 10, null, null, true, false);
-        editLOTRMaterial(LOTRMaterial.NEAR_HARAD, 700, 3.0f, 0.712f, 7.0f, 3, 10, null, null, false, false);
-        editLOTRMaterial(LOTRMaterial.ANGMAR, 700, 3.0f, 0.712f, 7.0f, 3, 10, null, null, true, false);
-        editLOTRMaterial(LOTRMaterial.GUNDABAD_URUK, 700, 3.0f, 0.712f, 7.0f, 3, 10, null, null, true, false);
-        editLOTRMaterial(LOTRMaterial.DUNLENDING, 700, 3.0f, 0.712f, 7.0f, 3, 10, null, null, false, false);
-        editLOTRMaterial(LOTRMaterial.RHUN, 700, 3.0f, 0.712f, 7.0f, 3, 10, null, null, false, false);
-        editLOTRMaterial(LOTRMaterial.BLUE_DWARVEN, 700, 3.0f, 0.712f, 7.0f, 3, 10, null, null, false, false);
-        editLOTRMaterial(LOTRMaterial.GALADHRIM, 700, 3.0f, 0.712f, 7.0f, 3, 10, null, null, false, false);
-        editLOTRMaterial(LOTRMaterial.HIGH_ELVEN, 700, 3.0f, 0.712f, 7.0f, 3, 10, null, null, false, false);
-        editLOTRMaterial(LOTRMaterial.DALE, 700, 3.0f, 0.712f, 7.0f, 3, 10, null, null, false, false);
-        editLOTRMaterial(LOTRMaterial.DWARVEN, 700, 3.0f, 0.712f, 7.0f, 3, 10, null, null, false, false);
-        editLOTRMaterial(LOTRMaterial.WOOD_ELVEN, 700, 3.0f, 0.712f, 7.0f, 3, 10, null, null, false, false);
-
-        editLOTRMaterial(LOTRMaterial.RHUN_GOLD, 700, 3.0f, 0.73f, 7.0f, 3, 10, null, null, false, false);
-    }
-
 	private static LOTRMaterial newLOTRMaterial(String name, int uses, float damage, float protection, float speed, int harvestLevel, int enchantability, Item craftingMaterial) {
 		return BDMaterial.newLOTRMaterial(name, uses, damage, protection, speed, harvestLevel, enchantability, craftingMaterial, false);
 	}
@@ -185,74 +184,74 @@ public class BDMaterial {
 		BDCommander.setMaterialCraftingItem(khazad3, BDRegistry.coin_dwarf);
 		BDCommander.setMaterialCraftingItem(khazad2, LOTRMod.dwarfSteel);
 		BDCommander.setMaterialCraftingItem(khazad1, LOTRMod.dwarfSteel);
-        setExistingCraftingItem(LOTRMaterial.DWARVEN, LOTRMod.dwarfSteel);
+		setExistingCraftingItem(LOTRMaterial.DWARVEN, LOTRMod.dwarfSteel);
 
 		BDCommander.setMaterialCraftingItem(rhovanion3, BDRegistry.coin_rhovanion);
 		BDCommander.setMaterialCraftingItem(rhovanion2, Items.iron_ingot);
 		BDCommander.setMaterialCraftingItem(rhovanion1, Items.iron_ingot);
-        setExistingCraftingItem(LOTRMaterial.DALE, Items.iron_ingot);
+		setExistingCraftingItem(LOTRMaterial.DALE, Items.iron_ingot);
 
 		BDCommander.setMaterialCraftingItem(sindar3, BDRegistry.coin_sindar);
 		BDCommander.setMaterialCraftingItem(sindar2, LOTRMod.elfSteel);
 		BDCommander.setMaterialCraftingItem(sindar1, LOTRMod.elfSteel);
-        setExistingCraftingItem(LOTRMaterial.GALADHRIM, LOTRMod.elfSteel);
+		setExistingCraftingItem(LOTRMaterial.GALADHRIM, LOTRMod.elfSteel);
 
 		BDCommander.setMaterialCraftingItem(enedwaith3, BDRegistry.coin_enedwaith);
 		BDCommander.setMaterialCraftingItem(enedwaith2, Items.iron_ingot);
 		BDCommander.setMaterialCraftingItem(enedwaith1, Items.iron_ingot);
-        setExistingCraftingItem(LOTRMaterial.DUNLENDING, Items.iron_ingot);
+		setExistingCraftingItem(LOTRMaterial.DUNLENDING, Items.iron_ingot);
 
 		BDCommander.setMaterialCraftingItem(nandor3, BDRegistry.coin_nandor);
 		BDCommander.setMaterialCraftingItem(nandor2, LOTRMod.elfSteel);
 		BDCommander.setMaterialCraftingItem(nandor1, LOTRMod.elfSteel);
-        setExistingCraftingItem(LOTRMaterial.WOOD_ELVEN, LOTRMod.elfSteel);
+		setExistingCraftingItem(LOTRMaterial.WOOD_ELVEN, LOTRMod.elfSteel);
 
 		BDCommander.setMaterialCraftingItem(noldor3, BDRegistry.coin_noldor);
 		BDCommander.setMaterialCraftingItem(noldor2, LOTRMod.elfSteel);
 		BDCommander.setMaterialCraftingItem(noldor1, LOTRMod.elfSteel);
-        setExistingCraftingItem(LOTRMaterial.HIGH_ELVEN, LOTRMod.elfSteel);
+		setExistingCraftingItem(LOTRMaterial.HIGH_ELVEN, LOTRMod.elfSteel);
 
 		BDCommander.setMaterialCraftingItem(harad3, BDRegistry.coin_harad);
 		BDCommander.setMaterialCraftingItem(harad2, Items.iron_ingot);
-        setExistingCraftingItem(LOTRMaterial.NEAR_HARAD, Items.iron_ingot);
+		setExistingCraftingItem(LOTRMaterial.NEAR_HARAD, Items.iron_ingot);
 
 		BDCommander.setMaterialCraftingItem(karndum3, BDRegistry.coin_karndum);
 		BDCommander.setMaterialCraftingItem(karndum2, LOTRMod.orcSteel);
-        setExistingCraftingItem(LOTRMaterial.ANGMAR, LOTRMod.orcSteel);
+		setExistingCraftingItem(LOTRMaterial.ANGMAR, LOTRMod.orcSteel);
 
 		BDCommander.setMaterialCraftingItem(red_dwarven3, BDRegistry.coin_red_mountains);
 		BDCommander.setMaterialCraftingItem(red_dwarven2, LOTRMod.blueDwarfSteel);
 		BDCommander.setMaterialCraftingItem(red_dwarven1, LOTRMod.blueDwarfSteel);
-        setExistingCraftingItem(LOTRMaterial.BLUE_DWARVEN, LOTRMod.blueDwarfSteel);
+		setExistingCraftingItem(LOTRMaterial.BLUE_DWARVEN, LOTRMod.blueDwarfSteel);
 
 		BDCommander.setMaterialCraftingItem(north3, BDRegistry.coin_north);
 		BDCommander.setMaterialCraftingItem(north2, LOTRMod.orcSteel);
-        setExistingCraftingItem(LOTRMaterial.GUNDABAD_URUK, LOTRMod.orcSteel);
+		setExistingCraftingItem(LOTRMaterial.GUNDABAD_URUK, LOTRMod.orcSteel);
 
 		BDCommander.setMaterialCraftingItem(mordor3, BDRegistry.coin_mordor);
 		BDCommander.setMaterialCraftingItem(mordor2, LOTRMod.orcSteel);
-        setExistingCraftingItem(LOTRMaterial.MORDOR, LOTRMod.orcSteel);
-        setExistingCraftingItem(LOTRMaterial.BLACK_URUK, LOTRMod.orcSteel);
+		setExistingCraftingItem(LOTRMaterial.MORDOR, LOTRMod.orcSteel);
+		setExistingCraftingItem(LOTRMaterial.BLACK_URUK, LOTRMod.orcSteel);
 
 		BDCommander.setMaterialCraftingItem(numenor3, BDRegistry.coin_numenor);
 		BDCommander.setMaterialCraftingItem(numenor2, Items.iron_ingot);
 		BDCommander.setMaterialCraftingItem(numenor1, Items.iron_ingot);
-        setExistingCraftingItem(LOTRMaterial.GONDOR, Items.iron_ingot);
+		setExistingCraftingItem(LOTRMaterial.GONDOR, Items.iron_ingot);
 
 		BDCommander.setMaterialCraftingItem(rhun3, BDRegistry.coin_rhun);
 		BDCommander.setMaterialCraftingItem(rhun2, Items.iron_ingot);
-        setExistingCraftingItem(LOTRMaterial.RHUN, Items.iron_ingot);
-        setExistingCraftingItem(LOTRMaterial.RHUN_GOLD, Items.iron_ingot);
+		setExistingCraftingItem(LOTRMaterial.RHUN, Items.iron_ingot);
+		setExistingCraftingItem(LOTRMaterial.RHUN_GOLD, Items.iron_ingot);
 	}
 
-    private static void setExistingCraftingItem(LOTRMaterial material, Item item) {
-        setExistingCraftingItem(material, new ItemStack(item), item);
-    }
+	private static void setExistingCraftingItem(LOTRMaterial material, Item item) {
+		setExistingCraftingItem(material, new ItemStack(item), item);
+	}
 
-    private static void setExistingCraftingItem(LOTRMaterial material, ItemStack toolItem, Item armorItem) {
-        BDCommander.setToolMaterialRepairItem(material.toToolMaterial(), toolItem);
-        material.toArmorMaterial().customCraftingMaterial = armorItem;
-    }
+	private static void setExistingCraftingItem(LOTRMaterial material, ItemStack toolItem, Item armorItem) {
+		BDCommander.setToolMaterialRepairItem(material.toToolMaterial(), toolItem);
+		material.toArmorMaterial().customCraftingMaterial = armorItem;
+	}
 
 	private static void setup() {
 		if (setup) {

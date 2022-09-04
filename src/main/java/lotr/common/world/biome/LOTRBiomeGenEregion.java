@@ -10,6 +10,7 @@
  */
 package lotr.common.world.biome;
 
+import bd.structure.*;
 import lotr.common.LOTRMod;
 import lotr.common.entity.animal.LOTREntityHorse;
 import lotr.common.world.biome.variant.LOTRBiomeVariant;
@@ -49,6 +50,9 @@ public class LOTRBiomeGenEregion extends LOTRBiome {
 		decorator.addTree(LOTRTreeType.PEAR, 2);
 		registerPlainsFlowers();
 		setBanditChance(LOTREventSpawner.EventChance.NEVER);
+		decorator.addRandomStructure(new BDStructureEregionHouse(false), 300);
+		decorator.addRandomStructure(new BDStructureEregionForge(false), 1000);
+		decorator.addRandomStructure(new BDStructureEregionTower(false), 900);
 	}
 
 	@Override

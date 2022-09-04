@@ -1,10 +1,9 @@
 package bd.entity;
 
-import bd.database.BDRegistry;
+import bd.database.*;
 import lotr.common.entity.npc.*;
 import lotr.common.fac.LOTRFaction;
 import lotr.common.world.biome.LOTRBiomeGenEregion;
-import lotr.common.world.structure.LOTRChestContents;
 import net.minecraft.entity.IEntityLivingData;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -30,7 +29,7 @@ public class BDEntityEregionElf extends LOTREntityHighElf {
 	protected void dropElfItems(boolean flag, int i) {
 		super.dropElfItems(flag, i);
 		if (rand.nextInt(6) == 0) {
-			dropChestContents(LOTRChestContents.ELF_HOUSE, 1, 1 + i);
+			dropChestContents(BDChestContents.EREGION_HALL, 1, 1 + i);
 		}
 	}
 

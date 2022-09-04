@@ -7,32 +7,30 @@ import net.minecraft.entity.ai.EntityAIBase;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
-public class LOTREntityGondorTowerGuard
-extends LOTREntityGondorSoldier {
-    public LOTREntityGondorTowerGuard(World world) {
-        super(world);
-        this.spawnRidingHorse = false;
-    }
+public class LOTREntityGondorTowerGuard extends LOTREntityGondorSoldier {
+	public LOTREntityGondorTowerGuard(World world) {
+		super(world);
+		spawnRidingHorse = false;
+	}
 
-    @Override
-    public EntityAIBase createGondorAttackAI() {
-        return new LOTREntityAIAttackOnCollide(this, 1.5, false);
-    }
+	@Override
+	protected void applyEntityAttributes() {
+		super.applyEntityAttributes();
+		getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(24.0);
+		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.24);
+	}
 
-    @Override
-    protected void applyEntityAttributes() {
-        super.applyEntityAttributes();
-        this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(24.0);
-        this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.24);
-    }
+	@Override
+	public EntityAIBase createGondorAttackAI() {
+		return new LOTREntityAIAttackOnCollide(this, 1.5, false);
+	}
 
-    @Override
-    public IEntityLivingData onSpawnWithEgg(IEntityLivingData data) {
-        data = super.onSpawnWithEgg(data);
-        this.npcItemsInv.setMeleeWeapon(new ItemStack(LOTRMod.spearGondor));
-        this.npcItemsInv.setIdleItem(this.npcItemsInv.getMeleeWeapon());
-        this.npcItemsInv.setSpearBackup(null);
-        return data;
-    }
+	@Override
+	public IEntityLivingData onSpawnWithEgg(IEntityLivingData data) {
+		data = super.onSpawnWithEgg(data);
+		npcItemsInv.setMeleeWeapon(new ItemStack(LOTRMod.spearGondor));
+		npcItemsInv.setIdleItem(npcItemsInv.getMeleeWeapon());
+		npcItemsInv.setSpearBackup(null);
+		return data;
+	}
 }
-

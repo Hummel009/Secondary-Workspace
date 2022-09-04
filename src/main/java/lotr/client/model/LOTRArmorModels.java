@@ -119,8 +119,8 @@ public class LOTRArmorModels {
 		Map<Item, ModelBiped> map = specialArmorModels.get(key);
 		if (map == null) {
 			map = new HashMap<>();
-			map.put(BDRegistry.helmetEnedwaithDonat, new LOTRModelMoredainLionHelmet(1.0f));
-			map.put(BDRegistry.rhovanionDonat_body, new BDModelNumenor3Chestplate());
+			map.put(BDRegistry.enedwaithdonat_helmet, new LOTRModelMoredainLionHelmet(1.0f));
+			map.put(BDRegistry.rhovaniondonat_chestplate, new BDModelNumenor3Chestplate());
 
 			map.put(BDRegistry.sibata1_helmet, new LOTRModelGondorHelmet(1.0f));
 			map.put(BDRegistry.sibata2_helmet, new LOTRModelSwanHelmet(1.0f));

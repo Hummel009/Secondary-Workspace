@@ -64,10 +64,6 @@ public class LOTRItemMug extends Item {
 		this(true, false, true, alc);
 	}
 
-	public void clearPotionEffects() {
-		potionEffects.clear();
-	}
-
 	@SideOnly(value = Side.CLIENT)
 	@Override
 	public void addInformation(ItemStack itemstack, EntityPlayer entityplayer, List list, boolean flag) {
@@ -109,6 +105,10 @@ public class LOTRItemMug extends Item {
 			return false;
 		}
 		return !isFoodDrink || entityplayer.canEat(false);
+	}
+
+	public void clearPotionEffects() {
+		potionEffects.clear();
 	}
 
 	private List<PotionEffect> convertPotionEffectsForStrength(float strength) {

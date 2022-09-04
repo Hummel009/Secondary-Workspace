@@ -101,7 +101,6 @@ public class LOTRGuiMap extends LOTRGuiMenuBase {
 	public static boolean showWP;
 	public static boolean showCWP;
 	public static boolean showHiddenSWP;
-	private static int maxDisplayedWPShares;
 	public static final int CONQUEST_COLOR = 12255232;
 	private static LOTRDimension.DimensionRegion currentRegion;
 	private static LOTRDimension.DimensionRegion prevRegion;
@@ -2140,7 +2139,7 @@ public class LOTRGuiMap extends LOTRGuiMenuBase {
 	}
 
 	private void setupScrollBars(int i, int j) {
-		maxDisplayedWPShares = fullscreen ? 8 : 5;
+		int maxDisplayedWPShares = fullscreen ? 8 : 5;
 		if (selectedWaypoint != null && hasOverlay && sharingWaypoint) {
 			displayedWPShareList = ((LOTRCustomWaypoint) selectedWaypoint).getSharedFellowshipIDs();
 			displayedWPShares = displayedWPShareList.size();

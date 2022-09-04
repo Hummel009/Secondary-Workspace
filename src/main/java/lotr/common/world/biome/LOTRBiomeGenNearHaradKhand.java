@@ -1,23 +1,15 @@
-/*
- * Decompiled with CFR 0.148.
- *
- * Could not load the following classes:
- *  net.minecraft.block.Block
- *  net.minecraft.block.BlockSand
- *  net.minecraft.init.Blocks
- *  net.minecraft.world.World
- *  net.minecraft.world.gen.NoiseGeneratorPerlin
- *  net.minecraft.world.gen.feature.WorldGenAbstractTree
- *  net.minecraft.world.gen.feature.WorldGenerator
- */
 package lotr.common.world.biome;
 
 import java.util.Random;
 
+import bd.structure.BDStructureKhandVillage;
 import lotr.common.LOTRMod;
+import lotr.common.entity.npc.LOTREntityBanditHarad;
 import lotr.common.world.biome.variant.LOTRBiomeVariant;
 import lotr.common.world.feature.LOTRTreeType;
 import lotr.common.world.spawning.*;
+import lotr.common.world.structure.LOTRWorldGenHaradObelisk;
+import lotr.common.world.structure2.LOTRWorldGenStoneRuin;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
@@ -45,6 +37,13 @@ public class LOTRBiomeGenNearHaradKhand extends LOTRBiomeGenNearHarad {
 		decorator.cactiPerChunk = 1;
 		decorator.deadBushPerChunk = 1;
 
+		decorator.addRandomStructure(new LOTRWorldGenHaradObelisk(false), 3000);
+		decorator.addRandomStructure(new LOTRWorldGenStoneRuin.NEAR_HARAD(1, 3), 300);
+		decorator.addRandomStructure(new LOTRWorldGenStoneRuin.NUMENOR(1, 3), 4000);
+
+		setBanditChance(LOTREventSpawner.EventChance.BANDIT_RARE);
+		setBanditEntityClass(LOTREntityBanditHarad.class);
+		decorator.addVillage(new BDStructureKhandVillage(this, 1.0f));
 	}
 
 	@Override

@@ -39,7 +39,7 @@ public class LOTRSpawnList {
 	public static final LOTRSpawnList ANGMAR_ORCS = new LOTRSpawnList(new LOTRSpawnEntry(LOTREntityAngmarOrc.class, 20, 4, 6), new LOTRSpawnEntry(LOTREntityAngmarOrcArcher.class, 10, 4, 6));
 	public static final LOTRSpawnList ANGMAR_BOMBARDIERS = new LOTRSpawnList(new LOTRSpawnEntry(LOTREntityAngmarOrcBombardier.class, 10, 1, 2));
 	public static final LOTRSpawnList ANGMAR_WARGS = new LOTRSpawnList(new LOTRSpawnEntry(LOTREntityAngmarWarg.class, 10, 4, 4));
-	public static final LOTRSpawnList ANGMAR_HILLMEN = new LOTRSpawnList(new LOTRSpawnEntry(LOTREntityAngmarHillman.class, 10, 4, 6), new LOTRSpawnEntry(LOTREntityAngmarHillmanWarrior.class, 5, 4, 6), new LOTRSpawnEntry(LOTREntityAngmarHillmanAxeThrower.class, 5, 4, 6));
+	public static final LOTRSpawnList ANGMAR_HILLMEN = new LOTRSpawnList(new LOTRSpawnEntry(LOTREntityAngmarHillman.class, 10, 4, 6), new LOTRSpawnEntry(LOTREntityAngmarHillmanWarrior.class, 5, 4, 6));
 	public static final LOTRSpawnList TROLLS = new LOTRSpawnList(new LOTRSpawnEntry(LOTREntityTroll.class, 10, 1, 3));
 	public static final LOTRSpawnList HILL_TROLLS = new LOTRSpawnList(new LOTRSpawnEntry(LOTREntityMountainTroll.class, 10, 1, 3));
 	public static final LOTRSpawnList SNOW_TROLLS = new LOTRSpawnList(new LOTRSpawnEntry(LOTREntitySnowTroll.class, 10, 1, 3));

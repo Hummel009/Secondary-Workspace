@@ -4,6 +4,7 @@ import bd.command.BDCommandSwitchLocation;
 import bd.database.*;
 import bd.entity.BDEntity;
 import bd.proxy.BDServerProxy;
+import bd.structure.BDStructure;
 import bd.util.*;
 import cpw.mods.fml.common.*;
 import cpw.mods.fml.common.event.*;
@@ -19,7 +20,12 @@ public class BlackDragon {
 	@Mod.Instance(value = "bd")
 	public static BlackDragon instance;
 	public static BDEventHandler event_handler;
+	public static BDTickHandlerServer tick_handler;
 	public static int shift = 1000;
+
+	static {
+		BDMaterial.changeLOTRMaterials();
+	}
 
 	@Mod.EventHandler
 	public void onInit(FMLInitializationEvent event) {
@@ -27,7 +33,7 @@ public class BlackDragon {
 		BDMaterial.onInit();
 		BDInvasions.onInit();
 		BDSpeech.onInit();
-		BDCommander.setServerMapImage(new ResourceLocation("bd:map/map.png"));
+		BDCommander.setServerMapImage(new ResourceLocation("bd:map/map_layer_1.png"));
 		BDWeaponStats.setupAndOverrideStats();
 		proxy.onInit(event);
 		BDCommander.disableWaypoint(LOTRWaypoint.FERTILE_VALLEY);
@@ -45,12 +51,10 @@ public class BlackDragon {
 		BDCreativeTabs.preInit();
 		BDRegistry.preInit();
 		BDEntity.preInit();
+		BDStructure.preInit();
 		BDRecipe.preInit();
 		event_handler = new BDEventHandler();
+		tick_handler = new BDTickHandlerServer();
 		proxy.preInit(event);
 	}
-
-    static {
-        BDMaterial.changeLOTRMaterials();
-    }
 }

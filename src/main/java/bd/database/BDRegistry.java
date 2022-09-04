@@ -12,23 +12,22 @@ import net.minecraft.item.Item.ToolMaterial;
 import net.minecraft.potion.Potion;
 
 public class BDRegistry {
-	public static Item battleaxeEnedwaithDonat;
-	public static Item battleaxeRhonanionDonat;
-	public static Item bodyEnedwaithDonat;
-	public static Item bootsEnedwaithDonat;
-	public static Item crossbowRhovanion;
-	public static Item enedwaithDonatBow;
-	public static Item hammerEnedwaithDonat;
-	public static Item helmetEnedwaithDonat;
-	public static Item legsEnedwaithDonat;
-	public static Item rhovanionDonat_body;
-	public static Item rhovanionDonat_boots;
-	public static Item rhovanionDonat_helmet;
-	public static Item rhovanionDonat_legs;
-	public static Item swordRhonanionDonat;
-
 	public static Block table_eregion;
 	public static Block table_khand;
+	public static Item enedwaithdonat_battleaxe;
+	public static Item enedwaithdonat_chestplate;
+	public static Item enedwaithdonat_boots;
+	public static Item enedwaithdonat_bow;
+	public static Item enedwaithdonat_hammer;
+	public static Item enedwaithdonat_helmet;
+	public static Item enedwaithdonat_leggings;
+	public static Item rhovaniondonat_sword;
+	public static Item rhovaniondonat_battleaxe;
+	public static Item rhovaniondonat_crossbow;
+	public static Item rhovaniondonat_chestplate;
+	public static Item rhovaniondonat_boots;
+	public static Item rhovaniondonat_helmet;
+	public static Item rhovaniondonat_leggings;
 	public static Item ametamy;
 	public static Item amogus;
 	public static Item apple_cookies;
@@ -37,6 +36,7 @@ public class BDRegistry {
 	public static Item armorcoin3;
 	public static Item arrow_blindness;
 	public static Item arrow_fire;
+	public static Item structure_spawner;
 	public static Item arrow_hunger;
 	public static Item arrow_slowness;
 	public static Item bbky1;
@@ -502,6 +502,7 @@ public class BDRegistry {
 	public static Item yelbag;
 
 	public static void preInit() {
+		structure_spawner = new BDItemStructureSpawner();
 		ametamy = new Item().setCreativeTab(BDCreativeTabs.tabAnus);
 		amogus = new LOTRItemSword(BDMaterial.numenor2).setCreativeTab(LOTRCreativeTabs.tabStory);
 		apple_cookies = new LOTRItemFood(8, 1.0f, false);
@@ -976,21 +977,21 @@ public class BDRegistry {
 		woodlock = new Item().setCreativeTab(BDCreativeTabs.tabAnus);
 		yelbag = new Item().setCreativeTab(BDCreativeTabs.tabAnus);
 
-		battleaxeEnedwaithDonat = new LOTRItemBattleaxe(BDMaterial.ENEDWAITHDONAT);
-		battleaxeRhonanionDonat = new LOTRItemBattleaxe(BDMaterial.RHOVANIONDONAT);
-		bodyEnedwaithDonat = new BDItemArmor(BDMaterial.ENEDWAITHDONAT, 1);
-		bootsEnedwaithDonat = new BDItemArmor(BDMaterial.ENEDWAITHDONAT, 3);
-		crossbowRhovanion = new LOTRItemCrossbow(BDMaterial.RHOVANIONDONAT);
-		enedwaithDonatBow = new LOTRItemBow(BDMaterial.ENEDWAITHDONAT);
-		hammerEnedwaithDonat = new LOTRItemHammer(BDMaterial.ENEDWAITHDONAT);
-		helmetEnedwaithDonat = new BDItemArmor(BDMaterial.ENEDWAITHDONAT, 0, "helmet");
-		legsEnedwaithDonat = new BDItemArmor(BDMaterial.ENEDWAITHDONAT, 2);
-		rhovanionDonat_body = new BDItemArmor(BDMaterial.RHOVANIONDONAT, 1, "chestplate");
-		rhovanionDonat_boots = new BDItemArmor(BDMaterial.RHOVANIONDONAT, 3);
-		rhovanionDonat_helmet = new BDItemArmor(BDMaterial.RHOVANIONDONAT, 0);
-		rhovanionDonat_legs = new BDItemArmor(BDMaterial.RHOVANIONDONAT, 2);
-		swordRhonanionDonat = new LOTRItemSword(BDMaterial.RHOVANIONDONAT);
+		enedwaithdonat_battleaxe = new LOTRItemBattleaxe(BDMaterial.enedwaithdonat);
+		enedwaithdonat_chestplate = new BDItemArmor(BDMaterial.enedwaithdonat, 1);
+		enedwaithdonat_boots = new BDItemArmor(BDMaterial.enedwaithdonat, 3);
+		enedwaithdonat_bow = new LOTRItemBow(BDMaterial.enedwaithdonat);
+		enedwaithdonat_hammer = new LOTRItemHammer(BDMaterial.enedwaithdonat);
+		enedwaithdonat_helmet = new BDItemArmor(BDMaterial.enedwaithdonat, 0, "helmet");
+		enedwaithdonat_leggings = new BDItemArmor(BDMaterial.enedwaithdonat, 2);
 
+		rhovaniondonat_chestplate = new BDItemArmor(BDMaterial.rhovaniondonat, 1, "chestplate");
+		rhovaniondonat_boots = new BDItemArmor(BDMaterial.rhovaniondonat, 3);
+		rhovaniondonat_helmet = new BDItemArmor(BDMaterial.rhovaniondonat, 0);
+		rhovaniondonat_leggings = new BDItemArmor(BDMaterial.rhovaniondonat, 2);
+		rhovaniondonat_sword = new LOTRItemSword(BDMaterial.rhovaniondonat);
+		rhovaniondonat_crossbow = new LOTRItemCrossbow(BDMaterial.rhovaniondonat);
+		rhovaniondonat_battleaxe = new LOTRItemBattleaxe(BDMaterial.rhovaniondonat);
 
 		BDPatcher.patchInventory();
 
@@ -1001,6 +1002,7 @@ public class BDRegistry {
 		registerBlock(table_khand, "table_khand");
 
 		registerItemLotr(mug_maple, "mug_maple");
+		registerItem(structure_spawner, "lotr:structureSpawner", true);
 
 		register(amogus, "amogus");
 		register(ametamy, "ametamy");
@@ -1516,21 +1518,24 @@ public class BDRegistry {
 		register(rhubarb_pie, "rhubarb_pie");
 		register(treasure_chest, "treasure_chest");
 		register(watermelon_cookies, "watermelon_cookies");
-		register(battleaxeEnedwaithDonat, "battleaxeEnedwaithDonat");
-		register(battleaxeRhonanionDonat, "battleaxeRhonanionDonat");
-		register(bodyEnedwaithDonat, "bodyEnedwaithDonat");
-		register(bootsEnedwaithDonat, "bootsEnedwaithDonat");
-		register(crossbowRhovanion, "crossbowRhovanion");
-		register(enedwaithDonatBow, "enedwaithDonatBow");
-		register(hammerEnedwaithDonat, "hammerEnedwaithDonat");
-		register(helmetEnedwaithDonat, "helmetEnedwaithDonat");
-		register(legsEnedwaithDonat, "legsEnedwaithDonat");
-		register(rhovanionDonat_body, "rhovanionDonat_body");
-		register(rhovanionDonat_boots, "rhovanionDonat_boots");
-		register(rhovanionDonat_helmet, "rhovanionDonat_helmet");
-		register(rhovanionDonat_legs, "rhovanionDonat_legs");
-		register(swordRhonanionDonat, "swordRhonanionDonat");
 
+		register(enedwaithdonat_helmet, "enedwaithdonat_helmet");
+		register(enedwaithdonat_chestplate, "enedwaithdonat_chestplate");
+		register(enedwaithdonat_leggings, "enedwaithdonat_leggings");
+		register(enedwaithdonat_boots, "enedwaithdonat_boots");
+
+		register(rhovaniondonat_helmet, "rhovaniondonat_helmet");
+		register(rhovaniondonat_chestplate, "rhovaniondonat_chestplate");
+		register(rhovaniondonat_leggings, "rhovaniondonat_leggings");
+		register(rhovaniondonat_boots, "rhovaniondonat_boots");
+
+		register(enedwaithdonat_battleaxe, "enedwaithdonat_battleaxe");
+		register(enedwaithdonat_bow, "enedwaithdonat_bow");
+		register(enedwaithdonat_hammer, "enedwaithdonat_hammer");
+
+		register(rhovaniondonat_sword, "rhovaniondonat_sword");
+		register(rhovaniondonat_crossbow, "rhovaniondonat_crossbow");
+		register(rhovaniondonat_battleaxe, "rhovaniondonat_battleaxe");
 	}
 
 	private static void register(Item item, String name) {
@@ -1545,9 +1550,16 @@ public class BDRegistry {
 		GameRegistry.registerBlock(block, name);
 	}
 
+	private static void registerItem(Item item, String name, boolean isSpawner) {
+		item.setTextureName(name);
+		item.setUnlocalizedName(name);
+		GameRegistry.registerItem(item, name);
+	}
+
 	public static void registerItemLotr(Item item, String name) {
 		item.setUnlocalizedName(name);
 		item.setTextureName("lotr:" + name);
 		GameRegistry.registerItem(item, name);
 	}
+
 }
